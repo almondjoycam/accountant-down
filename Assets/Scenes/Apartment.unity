@@ -277,6 +277,38 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
       objectReference: {fileID: 2100000, guid: 2f44a95bfd0db548ca326ef0cd731eef, type: 2}
+    - target: {fileID: -3957782524123411102, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Name
+      value: door
+      objectReference: {fileID: 0}
+    - target: {fileID: -3957782524123411102, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2615453208677245630, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Name
+      value: sink
+      objectReference: {fileID: 0}
+    - target: {fileID: -2615453208677245630, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -344004081357383697, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Name
+      value: coffin
+      objectReference: {fileID: 0}
+    - target: {fileID: -344004081357383697, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8140499575222096, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Name
+      value: fridge
+      objectReference: {fileID: 0}
+    - target: {fileID: -8140499575222096, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 12c7c576dc84a8fe09248d2ac85421ed, type: 3}
       propertyPath: m_Name
       value: Apartment V1 export 2
@@ -706,7 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineTransposer
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 7, z: -15}
-  m_XDamping: 1
+  m_XDamping: 3
   m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
@@ -972,7 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 10
-  rotSpeed: 10
+  rotSpeed: 5
   maxRotAngle: 30
 --- !u!143 &2140202231
 CharacterController:

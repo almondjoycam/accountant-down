@@ -24,6 +24,12 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     CinemachineTransposer vcamFollow;
 
+    // interacting
+    float raycastInterval = 0.5f;
+    float raycastTime = 0;
+    bool canInteract = false;
+    RaycastHit raycastResult;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,9 +67,9 @@ public class Player : MonoBehaviour
             movement += Physics.gravity;
         }
         character.Move(movement * moveSpeed * Time.deltaTime);
-        transform.Rotate(0, Mathf.Lerp(0, lookInput.x * rotSpeed, Time.deltaTime), 0);
-        newOffset = vcamFollow.m_FollowOffset + (
-            Vector3.up * -lookInput.y * Time.deltaTime);
+        transform.Rotate(0, Mathf.Lerp(0, lookInput.x * rotSpeed,
+                                       Time.deltaTime), 0);
+        newOffset = vcamFollow.m_FollowOffset + (Vector3.up * -lookInput.y * Time.deltaTime);
         vcamFollow.m_FollowOffset = Vector3.RotateTowards(
             vcamFollow.m_FollowOffset,
             newOffset,
@@ -74,7 +80,19 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        raycastTime += Time.deltaTime;
+        if (raycastTime >= raycastInterval)
+        {
+            raycastTime = 0;
+            canInteract = Physics.Raycast(
+                transform.position,
+                vcamFollow.transform.forward,
+                out raycastResult,
+                5,
+                1 << 3,
+                QueryTriggerInteraction.UseGlobal
+            );
+        }
     }
 
     void OnMove(InputAction.CallbackContext context)
@@ -97,6 +115,9 @@ public class Player : MonoBehaviour
 
     void OnInteract(InputAction.CallbackContext context)
     {
-
+        if (canInteract)
+        {
+            Debug.Log(raycastResult.transform.name);
+        }
     }
 }
