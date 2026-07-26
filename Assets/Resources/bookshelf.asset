@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f09a605458a05586b0c4c0eba0e8d33, type: 3}
   m_Name: bookshelf
   m_EditorClassIdentifier: Assembly-CSharp::StoreItem
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 3ae840b4eb675b3eeb8271428447a0c9, type: 3}
   cost: 115
   itemName: Bookshelf
   itemDescription: A good place to store all the books you haven't gotten around
     to reading. Solid wood, no wobbling.
-  prefab: {fileID: 0}
+  prefab: {fileID: 919132149155446097, guid: 4887cbd6be799894e86604b4fcee2c4c, type: 3}

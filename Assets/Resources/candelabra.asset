@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f09a605458a05586b0c4c0eba0e8d33, type: 3}
   m_Name: candelabra
   m_EditorClassIdentifier: Assembly-CSharp::StoreItem
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: cf08413f6a81c5bbba78196254f16f9e, type: 3}
   cost: 30
   itemName: Candelabra
   itemDescription: Like a candlestick, but fancy. Now with three times the light.
-  prefab: {fileID: 0}
+  prefab: {fileID: 919132149155446097, guid: 2aa41fc708236c44cb9d4299324cef01, type: 3}

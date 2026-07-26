@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f09a605458a05586b0c4c0eba0e8d33, type: 3}
   m_Name: candle
   m_EditorClassIdentifier: Assembly-CSharp::StoreItem
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 7e172bebfb7d075e5aab47f49b881261, type: 3}
   cost: 15
   itemName: Candle
   itemDescription: A nice little electric candle. The building doesn't allow open

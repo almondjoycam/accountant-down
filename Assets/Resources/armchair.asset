@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f09a605458a05586b0c4c0eba0e8d33, type: 3}
   m_Name: armchair
   m_EditorClassIdentifier: Assembly-CSharp::StoreItem
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: d4ee3d135904d12419fad1a29c5bb05e, type: 3}
   cost: 80
   itemName: Armchair
   itemDescription: A nice leather armchair. Comfortable and cozy.
-  prefab: {fileID: 0}
+  prefab: {fileID: 919132149155446097, guid: 84369cd802369f34b882b285a7b21a14, type: 3}
