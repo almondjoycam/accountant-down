@@ -76,7 +76,8 @@ public class UniversalOverlayScript : MonoBehaviour
         {
             SceneManager.LoadScene("Evicted");
         }
-        
+        SceneManager.LoadScene("Apartment");
+        GameObject.FindGameObjectWithTag("Win Sprite").SetActive(true);
     }
 
     private void UpdateTimeDisplay()
