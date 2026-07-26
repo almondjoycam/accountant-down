@@ -116,5 +116,9 @@ public class UniversalOverlayScript : MonoBehaviour
 
     }
 
+    public float GetMoney()
+    {
+        return money;
+    }
 
 }
