@@ -6,6 +6,7 @@ public class BarGame : MonoBehaviour
 {
 
     float drunkeness = 0f;
+    static int total_drinks = 0;
     float rotation_state = 0f;
     int direction = 1;
     float max_angle = 30;
@@ -90,9 +91,10 @@ public class BarGame : MonoBehaviour
         Debug.Log(slider_state);
         if(Math.Abs(slider_state) < 1.3f) {
             drunkeness++;
+            total_drinks++;
             //trigger happiness
-            float hapiness_from_drink = UnityEngine.Random.Range(-1.0f *(.6f + .52f * drunkeness), .5f + .5f * drunkeness) *(drunkeness *.1f);
-            if (hapiness_from_drink > 0) hapiness_from_drink = hapiness_from_drink * 1.5f;
+            float hapiness_from_drink = UnityEngine.Random.Range(-1.0f *(.6f + .32f * drunkeness + .02f * total_drinks), .5f + .5f * drunkeness) *(drunkeness *.1f);
+            if (hapiness_from_drink > 0) hapiness_from_drink = hapiness_from_drink * 1.2f;
             ui.ChangeHappiness(hapiness_from_drink);
             
 
