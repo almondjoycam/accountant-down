@@ -8,12 +8,12 @@ public class UniversalOverlayScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    float money = 1.37f;
+    float money = 13.37f;
     float happiness = 6.67f;
     bool at_work = false;
 
-    float starting_time = 900f;
-    float time_remaining = 900f;
+    float starting_time = 9f;
+    float time_remaining = 9f;
 
     static bool already_made = false;
 
@@ -76,6 +76,7 @@ public class UniversalOverlayScript : MonoBehaviour
         {
             SceneManager.LoadScene("Evicted");
         }
+        
     }
 
     private void UpdateTimeDisplay()

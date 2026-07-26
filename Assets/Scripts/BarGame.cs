@@ -110,7 +110,7 @@ public class BarGame : MonoBehaviour
             drunkeness++;
             total_drinks++;
             //trigger happiness
-            float hapiness_from_drink = UnityEngine.Random.Range(-1.0f *(.6f + .32f * drunkeness + .02f * total_drinks), .5f + .5f * drunkeness) *(drunkeness *.1f);
+            float hapiness_from_drink = UnityEngine.Random.Range(-1.0f *(.6f + .37f * drunkeness + .05f * total_drinks), .5f + .5f * drunkeness) *(drunkeness *.1f);
             if (hapiness_from_drink > 0) hapiness_from_drink = hapiness_from_drink * 1.2f;
             ui.ChangeHappiness(hapiness_from_drink);
             
