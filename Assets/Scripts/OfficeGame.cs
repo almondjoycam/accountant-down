@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class OfficeGame : MonoBehaviour
 {
@@ -17,7 +19,11 @@ public class OfficeGame : MonoBehaviour
 
     */
 
+    InputActionMap minigame_actions;
+    InputAction leave;
+
     Transform grid;
+    private GameObject spacer; //used because game does not want to destroy all of grid's children
     UniversalOverlayScript currency_holder;
 
     [SerializeField] int max_balance;
@@ -39,11 +45,17 @@ public class OfficeGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        minigame_actions = InputSystem.actions.FindActionMap("Drinking");
+        leave = minigame_actions.FindAction("leave");
+
+        leave.performed += OnLeave;
+
         grid = transform.GetChild(0);
         left_col_display = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
         right_col_display = transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>();
         swaps_display = transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>();
         currency_holder = GameObject.FindAnyObjectByType<UniversalOverlayScript>();
+        currency_holder.SetWorking(true);
         CreatePuzzle();
     }
 
@@ -53,6 +65,15 @@ public class OfficeGame : MonoBehaviour
         
     }
 
+    void Oestroy()
+    {
+        currency_holder.SetWorking(false);
+    }
+
+    void OnLeave(InputAction.CallbackContext context)
+    {
+        SceneManager.LoadScene("Office");
+    }
     void CreatePuzzle()
     {
         balance_value = (int)UnityEngine.Random.Range(25f, max_balance); //get correct value
@@ -100,17 +121,28 @@ public class OfficeGame : MonoBehaviour
         //column displays
         left_col_display.text = LeftColSum().ToString();
         right_col_display.text = RightColSum().ToString();
-        swaps_display.text = "Swaps to make puzzle" + swaps.ToString();
+        swaps_display.text = "Swaps to make puzzle: " + swaps.ToString();
+        //debug card states - looking at what happens on making a new puzzle
+        
+
 
         //make cards - after swaps to avoid messy movement code being required to set up puzzle, no need to figure out swapping positioning(probably w/ SetSiblingIndex if it becomes necessary)
         foreach(int value in current_state) {
             GameObject new_card = Instantiate(card);
             new_card.transform.SetParent(grid);
             new_card.transform.localScale = new Vector3(1,1,1);
+
+            
+
             SetCardText(value.ToString(), new_card);
         }
+        for (int i = 0; i < 8;i++ ) {
+            Debug.Log(card_values[i]);
+            Debug.Log(current_state[i]);
+        }
+        Debug.Log(grid.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text);
         
-        
+        if(grid.childCount > 8) Destroy(grid.GetChild(0));
     }
 
     private void SetCardText(String text, GameObject card)
@@ -145,13 +177,15 @@ public class OfficeGame : MonoBehaviour
     public void UpdateGame(int start_move_index, int end_move_index)
     {
         Debug.Log("GameUpdate");
+        PrintCards(start_move_index, end_move_index);
         SwapCards(start_move_index, end_move_index);
                 //column displays
         left_col_display.text = LeftColSum().ToString();
         right_col_display.text = RightColSum().ToString();
         if (CheckIfWon())
         {
-            currency_holder.ChangeMoney(55);
+            PrintCards(0, 7);
+            currency_holder.ChangeMoney(155);
             currency_holder.ChangeHappiness(-.5f);
             ClearGame();
             CreatePuzzle();
@@ -189,15 +223,27 @@ public class OfficeGame : MonoBehaviour
 
     private void ClearGame()
     {
+
+        //avoid problems w/ last card not getting destroyed by reloading scene? kind of hacky but I don't have time to debug this
+        SceneManager.LoadScene("OfficeGame");
         //formatted this way to avoid updating indexes or not as objects get destroyed
         GameObject[] cards = new GameObject[8];
         for(int i = 0; i < 8; i++)
         {
             cards[i] = grid.GetChild(i).gameObject;
+            Debug.Log(cards[i]);
         }
         for(int i = 0; i < 8; i++)
         {
             Destroy(cards[i]);
         }
+    }
+
+    private void PrintCards(int start_index, int target_index)
+    {
+        Debug.Log("First card: " + current_state[0]);
+        Debug.Log("Start swap: " + current_state[start_index]);
+        Debug.Log("Target swap: " + current_state[target_index]);
+        Debug.Log("End: " + current_state[7]);
     }
 }

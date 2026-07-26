@@ -8,10 +8,11 @@ public class UniversalOverlayScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     float money = 1.37f;
-    float happiness = 3.67f;
+    float happiness = 6.67f;
+    bool at_work = false;
 
-    float starting_time = 600f;
-    float time_remaining = 600f;
+    float starting_time = 900f;
+    float time_remaining = 900f;
 
     static bool already_made = false;
 
@@ -19,6 +20,7 @@ public class UniversalOverlayScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI money_display;
     [SerializeField] TextMeshProUGUI happiness_display;
     
+    double marked_time;//only 1 happiness decay /time value
 
 
     void Start()
@@ -26,7 +28,7 @@ public class UniversalOverlayScript : MonoBehaviour
         //only 1 universal overlay
         if (already_made)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
@@ -42,15 +44,30 @@ public class UniversalOverlayScript : MonoBehaviour
     {
         time_remaining = starting_time - Time.time;
         if (time_remaining <=0) EndGame();//endgame
-        if (Math.Round(time_remaining) % 10 == 0) HappinessDecay(Math.Round(time_remaining));
+        if (Math.Round(time_remaining) % 20 == 0) {
+            HappinessDecay(Math.Round(time_remaining));
+            
+            marked_time = Math.Round(time_remaining);
+
+        }
         UpdateTimeDisplay();
     }
 
-    double marked_time;//only 1 happiness decay /time value
+    public void SetWorking(bool working)
+    {
+        at_work = working;
+    }
+
     private void HappinessDecay(double time)
     {
-        if (marked_time != time) ChangeHappiness(-.5f);
-        marked_time = Math.Round(time_remaining);
+        if (marked_time == time) return;
+        if(at_work) ChangeHappiness(-1f);
+        ChangeHappiness(-1f);
+    }
+    private void Paycheck(double time)
+    {
+        if (marked_time == time) return;
+        if (at_work) ChangeMoney(15.5f);
     }
     private void EndGame()
     {
@@ -63,7 +80,8 @@ public class UniversalOverlayScript : MonoBehaviour
         String minutes_text = minutes.ToString();
         int seconds = (int)time_remaining % 60;
         String seconds_text = seconds.ToString();
-        time_remaining_display.text = "Time " +  minutes_text + ":" + seconds_text;
+        if (seconds / 10 == 0) seconds_text = "0" + seconds_text;
+        time_remaining_display.text = "Rent Due: " +  minutes_text + ":" + seconds_text;
 
     }
 
