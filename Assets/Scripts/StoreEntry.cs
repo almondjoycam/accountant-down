@@ -31,5 +31,6 @@ public class StoreEntry : MonoBehaviour
     void AttemptPurchase()
     {
         stats.ChangeMoney(-item.cost);
+        stats.ChangeHappiness(50);
     }
 }
