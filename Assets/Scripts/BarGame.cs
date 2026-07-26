@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
 public class BarGame : MonoBehaviour
@@ -13,6 +13,8 @@ public class BarGame : MonoBehaviour
     float slider_bounds = 7.4f;
     int slider_direction = 1;
 
+
+    UniversalOverlayScript ui;
     //controls
 
     InputActionMap drinkingControlMap;
@@ -36,6 +38,13 @@ public class BarGame : MonoBehaviour
     void Start()
     {
         slider = transform.GetChild(0).GetChild(0);
+
+        drinkingControlMap = InputSystem.actions.FindActionMap("Drinking");
+        drink = drinkingControlMap.FindAction("Drink");
+        leave = drinkingControlMap.FindAction("Leave");
+
+        drink.performed += OnDrink;
+        leave.performed += OnLeave;
     }
 
     // Update is called once per frame
@@ -61,18 +70,23 @@ public class BarGame : MonoBehaviour
 
         slider.Translate(new Vector3(slider_movespeed, 0, 0));
         slider_state += slider_movespeed;
-        Debug.Log(slider_state);
+        
 
         if (slider_state > slider_bounds) slider_direction = -1;
         if (Math.Abs(slider_state) > slider_bounds && slider_state < 0) slider_direction = 1;
 
     }
 
-    void OnDrink()
+    void OnDrink(InputAction.CallbackContext context)
     {
+        Debug.Log(slider_state);
         if(Math.Abs(slider_state) < 1.3f) {
             drunkeness++;
             //trigger happiness
+            float hapiness_from_drink = UnityEngine.Random.Range(-1.0f *(.8f + .05f * drunkeness), 1.3f) * drunkeness;
+            ui.ChangeHappiness(hapiness_from_drink);
+            ui.ChangeMoney(-1); //costs a dollar
+
             //play vampire animation
         } else
         {
@@ -84,6 +98,15 @@ public class BarGame : MonoBehaviour
     {
         //load bar scene?
         //play sound effect?
+    }
+
+    void OnLeave(InputAction.CallbackContext context)
+    {
+        LeaveGame();
+    }
+    void LeaveGame()
+    {
+        Debug.Log("Drinking Game Over");        
     }
 
     

@@ -1088,7 +1088,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Drink",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1099,7 +1099,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Drink",
                     "isComposite": false,
                     "isPartOfComposite": false
