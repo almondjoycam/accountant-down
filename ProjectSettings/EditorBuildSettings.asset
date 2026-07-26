@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bar.unity
     guid: 3aec8398588b67fc898cba5a82ddd48f
+  - enabled: 1
+    path: Assets/Scenes/OfficeGame.unity
+    guid: ab7b29ea845a0cb859b8f9e93627e905
+  - enabled: 1
+    path: Assets/Scenes/Testbargame.unity
+    guid: 9414ac1bcd6506e46ac9beef431b6bd2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
