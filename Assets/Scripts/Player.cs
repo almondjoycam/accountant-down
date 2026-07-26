@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     float raycastTime = 0;
     bool canInteract = false;
     RaycastHit raycastResult;
+    GameObject prompt;
+    Animator promptProgress;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
         move.canceled += OnMove;
         look.performed += OnLook;
         look.canceled += OnLook;
+        interact.started += OnInteractBegin;
         interact.performed += OnInteract;
         movement = Vector3.zero;
 
@@ -55,6 +58,10 @@ public class Player : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        prompt = transform.Find("Prompt").gameObject;
+        promptProgress = prompt.GetComponentInChildren<Animator>();
+        prompt.SetActive(false);
     }
 
     // Update is called once per frame
@@ -92,6 +99,7 @@ public class Player : MonoBehaviour
                 1 << 3,
                 QueryTriggerInteraction.UseGlobal
             );
+            prompt.SetActive(canInteract);
         }
     }
 
@@ -113,11 +121,23 @@ public class Player : MonoBehaviour
         lookInput = context.ReadValue<Vector2>();
     }
 
+    void OnInteractBegin(InputAction.CallbackContext context)
+    {
+        if (canInteract)
+        {
+            promptProgress.SetTrigger("Hold");
+        }
+    }
+
     void OnInteract(InputAction.CallbackContext context)
     {
         if (canInteract)
         {
             Debug.Log(raycastResult.transform.name);
+            raycastResult.transform.GetComponent<IInteractable>()?.Interact();
+            prompt.SetActive(false);
         }
     }
+
+
 }
