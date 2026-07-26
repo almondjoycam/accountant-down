@@ -2,6 +2,7 @@ using System;
 using System.Data.SqlTypes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UniversalOverlayScript : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class UniversalOverlayScript : MonoBehaviour
     {
         if (money < 1200)
         {
-            
+            SceneManager.LoadScene("Evicted");
         }
     }
 
@@ -107,7 +108,9 @@ public class UniversalOverlayScript : MonoBehaviour
 
         happiness_display.text = happiness_whole.ToString();
 
-        if (happiness < 0) Debug.Log("Depression.");//trigger depression ending
+        if (happiness < 0) {
+            SceneManager.LoadScene("Depression");
+            Debug.Log("Depression.");}//trigger depression ending
 
     }
 

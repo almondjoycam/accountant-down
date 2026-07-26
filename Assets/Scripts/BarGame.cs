@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using Unity.VectorGraphics;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class BarGame : MonoBehaviour
 {
@@ -23,6 +26,9 @@ public class BarGame : MonoBehaviour
     InputAction drink;
     InputAction leave;
 
+    VideoPlayer vp;
+    float time_start;
+    [SerializeField] VideoClip clip;
 
     Transform slider;
     /** TO DOS:
@@ -38,6 +44,9 @@ public class BarGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        vp = FindAnyObjectByType<VideoPlayer>();
+        time_start = Time.time;
+
         slider = transform.GetChild(0).GetChild(0);
         ui = FindAnyObjectByType<UniversalOverlayScript>();
 
@@ -55,11 +64,19 @@ public class BarGame : MonoBehaviour
         Debug.Log(leave);
     }
 
+
+    bool change_clip = false;
     // Update is called once per frame
     void Update()
     {
         RotateBar();  
         MoveSlider(); 
+        if(!change_clip && Time.time > time_start + 1.3f)
+        {
+            vp.clip = clip;
+            vp.isLooping = true;
+            change_clip = true;
+        }
     }
 
     //called each frame, relies on 'drunkeness' meter
@@ -111,6 +128,7 @@ public class BarGame : MonoBehaviour
     {
         //load apartment scene
         //play sound effect?
+        LeaveGame();
     }
 
     void OnLeave(InputAction.CallbackContext context)
@@ -119,7 +137,7 @@ public class BarGame : MonoBehaviour
     }
     void LeaveGame()
     {
-
+        SceneManager.LoadScene("Apartment");
         Debug.Log("Drinking Game Over");        
     }
 
