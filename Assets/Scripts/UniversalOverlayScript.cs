@@ -12,8 +12,8 @@ public class UniversalOverlayScript : MonoBehaviour
     float happiness = 6.67f;
     bool at_work = false;
 
-    float starting_time = 9f;
-    float time_remaining = 9f;
+    float starting_time = 600f;
+    float time_remaining = 600f;
 
     static bool already_made = false;
 

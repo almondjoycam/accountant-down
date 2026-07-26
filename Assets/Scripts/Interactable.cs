@@ -37,5 +37,10 @@ public abstract class Interactable : MonoBehaviour
         Cursor.visible = true;
     }
 
+    void OnDestroy()
+    {
+        cancel.performed -= OnCancel;
+    }
+
     public abstract void Interact();
 }

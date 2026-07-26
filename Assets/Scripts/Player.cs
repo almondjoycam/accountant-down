@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         look = playerControlMap.FindAction("Look");
         interact = playerControlMap.FindAction("Interact");
 
+        playerControlMap.Enable();
         move.performed += OnMove;
         move.canceled += OnMove;
         look.performed += OnLook;
@@ -50,9 +51,7 @@ public class Player : MonoBehaviour
 
         character = GetComponent<CharacterController>();
         sprite = GetComponent<SpriteRenderer>();
-        vcamFollow = ((CinemachineVirtualCamera)
-            Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera)
-            .GetCinemachineComponent<CinemachineTransposer>();
+        vcamFollow = FindAnyObjectByType<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>();
         baseOffset = vcamFollow.m_FollowOffset;
         newOffset = baseOffset;
 
@@ -139,5 +138,13 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    void OnDestroy()
+    {
+        move.performed -= OnMove;
+        move.canceled -= OnMove;
+        look.performed -= OnLook;
+        look.canceled -= OnLook;
+        interact.started -= OnInteractBegin;
+        interact.performed -= OnInteract;
+    }
 }
