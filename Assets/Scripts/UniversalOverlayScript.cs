@@ -8,10 +8,12 @@ public class UniversalOverlayScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     float money = 1.37f;
-    float happiness = 1.67f;
+    float happiness = 3.67f;
 
-    float starting_time = 6000f;
-    float time_remaining = 6000f;
+    float starting_time = 600f;
+    float time_remaining = 600f;
+
+    static bool already_made = false;
 
     [SerializeField] TextMeshProUGUI time_remaining_display;
     [SerializeField] TextMeshProUGUI money_display;
@@ -21,6 +23,15 @@ public class UniversalOverlayScript : MonoBehaviour
 
     void Start()
     {
+        //only 1 universal overlay
+        if (already_made)
+        {
+            Destroy(this);
+            return;
+        }
+
+        already_made = true;
+
         money_display.text = "$" + money.ToString();
         happiness_display.text = happiness.ToString();
         DontDestroyOnLoad(gameObject);
@@ -30,7 +41,20 @@ public class UniversalOverlayScript : MonoBehaviour
     void Update()
     {
         time_remaining = starting_time - Time.time;
+        if (time_remaining <=0) EndGame();//endgame
+        if (Math.Round(time_remaining) % 10 == 0) HappinessDecay(Math.Round(time_remaining));
         UpdateTimeDisplay();
+    }
+
+    double marked_time;//only 1 happiness decay /time value
+    private void HappinessDecay(double time)
+    {
+        if (marked_time != time) ChangeHappiness(-.5f);
+        marked_time = Math.Round(time_remaining);
+    }
+    private void EndGame()
+    {
+        
     }
 
     private void UpdateTimeDisplay()
