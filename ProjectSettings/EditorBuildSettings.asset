@@ -20,5 +20,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testbargame.unity
     guid: 9414ac1bcd6506e46ac9beef431b6bd2
+  - enabled: 1
+    path: Assets/Scenes/Depression.unity
+    guid: ba06cf5827286c140b1a9fd49643b3ee
+  - enabled: 1
+    path: Assets/Scenes/Evicted.unity
+    guid: a57a7a9b946071f468a5a6b2854ef49a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
