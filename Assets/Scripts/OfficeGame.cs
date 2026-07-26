@@ -185,7 +185,7 @@ public class OfficeGame : MonoBehaviour
         if (CheckIfWon())
         {
             PrintCards(0, 7);
-            currency_holder.ChangeMoney(155);
+            currency_holder.ChangeMoney(255);
             currency_holder.ChangeHappiness(-.5f);
             ClearGame();
             CreatePuzzle();

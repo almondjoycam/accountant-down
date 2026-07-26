@@ -98,7 +98,7 @@ public class BarGame : MonoBehaviour
             ui.ChangeHappiness(hapiness_from_drink);
             
 
-            ui.ChangeMoney(-1); //costs a dollar
+            ui.ChangeMoney(-3); //costs a dollar
 
             //play vampire animation
         } else

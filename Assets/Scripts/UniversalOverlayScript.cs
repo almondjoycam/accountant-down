@@ -67,11 +67,14 @@ public class UniversalOverlayScript : MonoBehaviour
     private void Paycheck(double time)
     {
         if (marked_time == time) return;
-        if (at_work) ChangeMoney(15.5f);
+        if (at_work) ChangeMoney(25.5f);
     }
     private void EndGame()
     {
-        
+        if (money < 1200)
+        {
+            
+        }
     }
 
     private void UpdateTimeDisplay()
