@@ -7,4 +7,5 @@ public class StoreItem : ScriptableObject
     public float cost;
     public string itemName;
     public string itemDescription;
+    public GameObject prefab;
 }

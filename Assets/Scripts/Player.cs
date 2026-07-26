@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         if (canInteract)
         {
             Debug.Log(raycastResult.transform.name);
-            raycastResult.transform.GetComponent<IInteractable>()?.Interact();
+            raycastResult.transform.GetComponent<Interactable>()?.Interact();
             prompt.SetActive(false);
         }
     }
